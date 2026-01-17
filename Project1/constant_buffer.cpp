@@ -106,23 +106,3 @@ ConstantBuffer::~ConstantBuffer() {
     assert(constantBuffer_ && "コンスタントバッファが未作成です");
     return gpuHandle_;
 }
-
-//---------------------------------------------------------------------------------
-/**
- * @brief	コンスタントバッファを取得する
- * @return	コンスタントバッファのポインタ
- */
-[[nodiscard]] D3D12_GPU_DESCRIPTOR_HANDLE ConstantBuffer::getGpuDescriptorHandle() const noexcept {
-    assert(constantBuffer_ && "コンスタントバッファが未作成です");
-    return gpuHandle_;
-}
-
-//---------------------------------------------------------------------------------
-/**
- * @brief	GPU 用ディスクリプタハンドルを取得する
- * @return	GPU 用ディスクリプタハンドル
- */
-[[nodiscard]] D3D12_GPU_DESCRIPTOR_HANDLE ConstantBuffer::getGpuDescriptorHandle() const noexcept {
-    assert(constantBuffer_ && "コンスタントバッファが未作成です");
-    return gpuHandle_;
-}
