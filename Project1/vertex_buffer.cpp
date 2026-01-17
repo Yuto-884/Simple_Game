@@ -1,4 +1,4 @@
-#include "vertex_buffer.h"
+/*#include "vertex_buffer.h"
 #include <cassert>
 #include <cstring>
 
@@ -88,5 +88,5 @@ bool VertexBuffer::create(
 const D3D12_VERTEX_BUFFER_VIEW& VertexBuffer::view() const noexcept {
     assert(vertexBuffer_);
     return vbView_;
-}
+}*/
 

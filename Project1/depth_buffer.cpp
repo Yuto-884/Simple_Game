@@ -2,7 +2,7 @@
 
 #include "depth_buffer.h"
 #include "descriptor_heap.h"
-#include "../window/window.h"
+#include "window.h"
 #include <cassert>
 
 namespace {

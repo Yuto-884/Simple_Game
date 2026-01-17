@@ -112,9 +112,9 @@ ConstantBuffer::~ConstantBuffer() {
  * @brief	コンスタントバッファを取得する
  * @return	コンスタントバッファのポインタ
  */
-[[nodiscard]] ID3D12Resource* ConstantBuffer::constantBuffer() const noexcept {
+[[nodiscard]] D3D12_GPU_DESCRIPTOR_HANDLE ConstantBuffer::getGpuDescriptorHandle() const noexcept {
     assert(constantBuffer_ && "コンスタントバッファが未作成です");
-    return constantBuffer_;
+    return gpuHandle_;
 }
 
 //---------------------------------------------------------------------------------
