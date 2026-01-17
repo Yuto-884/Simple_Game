@@ -1,82 +1,86 @@
-// ウィンドウ制御クラス
+// 入力処理を担当するクラス
 
 #pragma once
 
 #include <Windows.h>
-#include <string>
+#include <cstdint>
+#include <array>
 
 //---------------------------------------------------------------------------------
 /**
- * @brief	ウィンドウ制御クラス
+ * @brief	入力処理クラス
  * 簡易シングルトンパターンで作成する
  */
-class Window final {
+class Input final {
 public:
-
     //---------------------------------------------------------------------------------
     /**
      * @brief	インスタンスの取得
      * @return	インスタンスの参照
      */
-    static Window& instance() noexcept {
-        static Window instance;
+    static Input& instance() noexcept {
+        static Input instance;
         return instance;
     }
 
     //---------------------------------------------------------------------------------
     /**
-     * @brief	ウィンドウの生成
-     * @param	instance	インスタンスハンドル
-     * @param	width		横幅
-     * @param	height		縦幅
-     * @param	name		ウィンドウ名
-     * @return	生成の成否
+     * @brief	キー情報の取得
+     * @param	key		キーの識別子
+     * @return	入力されていればtrue
      */
-    [[nodiscard]] HRESULT create(HINSTANCE instance, int width, int height, std::string_view name) noexcept;
+    [[nodiscard]] bool getKey(uint16_t sKey) const noexcept;
 
     //---------------------------------------------------------------------------------
     /**
-     * @brief	メッセージループ
+     * @brief	キー情報の取得
+     * @param	key		キーの識別子
+     * @return	入力したらtrue
      */
-    [[nodiscard]] bool messageLoop() const noexcept;
+    [[nodiscard]] bool getTrigger(uint16_t sKey) const noexcept;
+
 
     //---------------------------------------------------------------------------------
     /**
-     * @brief	ウィンドウハンドルを取得する
-     * @return	ウィンドウハンドル
+     * @brief	キー情報の更新
+     * @param	pState	ハードから設定されたキー情報配列のポインタ
+     * @return
      */
-    [[nodiscard]] HWND handle() const noexcept;
+    void updateKeyState(void* pState) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
-     * @brief	ウィンドウのサイズを取得する
-     * @return　ウィンドウのサイズ (横幅, 縦幅)
+     * @brief	キー情報の更新
+     * @return
      */
-    [[nodiscard]] std::pair<int, int> size() const noexcept;
+    void updatePrevKeyState() noexcept;
+
 
 private:
+    // シングルトンパターンにするため、コンストラクタとデストラクタを private にする
+
     //---------------------------------------------------------------------------------
     /**
      * @brief    コンストラクタ
      */
-    Window() = default;
+    Input() = default;
+
     //---------------------------------------------------------------------------------
     /**
      * @brief    デストラクタ
      */
-    ~Window() = default;
+    ~Input() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	コピーとムーブの禁止
      */
-    Window(const Window& r) = delete;
-    Window& operator=(const Window& r) = delete;
-    Window(Window&& r) = delete;
-    Window& operator=(Window&& r) = delete;
+    Input(const Input& r) = delete;
+    Input& operator=(const Input& r) = delete;
+    Input(Input&& r) = delete;
+    Input& operator=(Input&& r) = delete;
 
 private:
-    HWND handle_{};  /// ウィンドウハンドル
-    int  witdh_{};   /// ウィンドウの横幅
-    int  height_{};  /// ウィンドウの縦幅
+    std::array<byte, 256> keyState_{};			/// ハードから設定されたキー情報配列
+    std::array<byte, 256> prevKeyState_{};		/// ハードから設定されたキー情報配列
 };

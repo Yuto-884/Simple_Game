@@ -7,23 +7,6 @@
 
 //---------------------------------------------------------------------------------
 /**
- * @brief    デストラクタ
- */
-DXGI::~DXGI() {
-    // DXGIファクトリーの解放
-    if (dxgiFactory_) {
-        dxgiFactory_->Release();
-        dxgiFactory_ = nullptr;
-    }
-    // アダプタの解放
-    if (dxgiAdapter_) {
-        dxgiAdapter_->Release();
-        dxgiAdapter_ = nullptr;
-    }
-}
-
-//---------------------------------------------------------------------------------
-/**
  * @brief	アダプタの設定
  * @return	情報が正しく取得できた場合は true
  */
@@ -53,12 +36,11 @@ DXGI::~DXGI() {
     // アダプタの取得
     {
         // アダプタを列挙
-        auto           select = 0;
-        IDXGIAdapter1* dxgiAdapter{};
+        auto                                  select = 0;
+        Microsoft::WRL::ComPtr<IDXGIAdapter1> dxgiAdapter{};
 
         // 適切なアダプタを選ぶ
         while (dxgiFactory_->EnumAdapters1(select, &dxgiAdapter) != DXGI_ERROR_NOT_FOUND) {
-
             DXGI_ADAPTER_DESC1 desc{};
             dxgiAdapter->GetDesc1(&desc);
 
@@ -71,10 +53,12 @@ DXGI::~DXGI() {
             }
 
             // Direct3D12 が動かない場合も除外
-            if (FAILED(D3D12CreateDevice(dxgiAdapter, D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr))) {
+            if (FAILED(D3D12CreateDevice(dxgiAdapter.Get(), D3D_FEATURE_LEVEL_11_0, _uuidof(ID3D12Device), nullptr))) {
                 dxgiAdapter->Release();
                 continue;
             }
+
+
 
             dxgiAdapter_ = dxgiAdapter;
             break;
@@ -97,10 +81,9 @@ DXGI::~DXGI() {
 [[nodiscard]] IDXGIFactory4* DXGI::factory() const noexcept {
     if (!dxgiFactory_) {
         assert(false && "DXGIファクトリーが未作成です");
-        return nullptr;
     }
 
-    return dxgiFactory_;
+    return dxgiFactory_.Get();
 }
 
 //---------------------------------------------------------------------------------
@@ -111,9 +94,7 @@ DXGI::~DXGI() {
 [[nodiscard]] IDXGIAdapter1* DXGI::displayAdapter() const noexcept {
     if (!dxgiAdapter_) {
         assert(false && "ディスプレイアダプターが未作成です");
-        return nullptr;
     }
 
-    return dxgiAdapter_;
+    return dxgiAdapter_.Get();
 }
-

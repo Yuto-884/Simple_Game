@@ -1,4 +1,4 @@
-#include "Dx12.h"
+/*#include "Dx12.h"
 
 //#include"command_allocator.h"
 //#include"command_list.h"
@@ -184,3 +184,4 @@ void Dx12::EnableDebugLayer() {
 	}
 #endif
 }
+*/

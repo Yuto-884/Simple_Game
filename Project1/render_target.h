@@ -29,31 +29,27 @@ public:
     //---------------------------------------------------------------------------------
     /**
      * @brief	バックバッファを生成する
-     * @param	device		デバイスクラスのインスタンス
-     * @param	swapChain	スワップチェインのポインタ
-     * @param	heap		ディスクリプターヒープのインスタンス
+     * @param	swapChain	スワップチェイン
      * @return	生成の成否
      */
-    [[nodiscard]] bool createBackBuffer(const Device& device, const SwapChain& swapChain, const DescriptorHeap& heap) noexcept;
+    [[nodiscard]] bool createBackBuffer(const SwapChain& swapChain) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	ビュー（ディスクリプタハンドル）を取得する
-     * @param	device	デバイスクラスのインスタンス
-     * @param	heap	ディスクリプタヒープのインスタンス
      * @param	index	インデックス
      * @return	ディスクリプタハンドル
      */
-    [[nodiscard]] D3D12_CPU_DESCRIPTOR_HANDLE getDescriptorHandle(const Device& device, const DescriptorHeap& heap, UINT index) const noexcept;
+    [[nodiscard]] D3D12_CPU_DESCRIPTOR_HANDLE getCpuDescriptorHandle(UINT index) const noexcept;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	レンダーターゲットを取得する
      * @param	index	インデックス
      */
-    [[nodiscard]] ID3D12Resource* get(uint32_t index) const noexcept;
+    [[nodiscard]] ID3D12Resource* get(UINT index) const noexcept;
 
 
 private:
-    std::vector<ID3D12Resource*> renderTargets_;  /// レンダーターゲットリソースの配列
+    std::vector<Microsoft::WRL::ComPtr<ID3D12Resource>> renderTargets_{};  /// レンダーターゲットリソースの配列
 };

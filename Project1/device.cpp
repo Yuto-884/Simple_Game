@@ -9,25 +9,19 @@
 
 //---------------------------------------------------------------------------------
 /**
- * @brief    デストラクタ
- */
-Device::~Device() {
-    // デバイスの解放
-    if (device_) {
-        device_->Release();
-        device_ = nullptr;
-    }
-}
-
-//---------------------------------------------------------------------------------
-/**
  * @brief	デバイスを作成する
  * @param	dxgi	DXGI クラスのインスタンス
  * @return	作成出来た場合は true
  */
-[[nodiscard]] bool Device::create(const DXGI& dxgi) noexcept {
+[[nodiscard]] bool Device::create() noexcept {
+    // DXGI の生成
+    if (!dxgiInstance_.setDisplayAdapter()) {
+        assert(false && "DXGIのアダプタ設定に失敗しました");
+        return false;
+    }
+
     // デバイス作成
-    const auto hr = D3D12CreateDevice(dxgi.displayAdapter(), D3D_FEATURE_LEVEL_12_0, IID_PPV_ARGS(&device_));
+    const auto hr = D3D12CreateDevice(dxgiInstance_.displayAdapter(), D3D_FEATURE_LEVEL_12_0, IID_PPV_ARGS(&device_));
     if (FAILED(hr)) {
         assert(false && "デバイス作成に失敗");
         return false;
@@ -44,9 +38,18 @@ Device::~Device() {
 [[nodiscard]] ID3D12Device* Device::get() const noexcept {
     if (!device_) {
         assert(false && "デバイスが未作成です");
-        return nullptr;
     }
 
-    return device_;
+    return device_.Get();
 }
+
+//---------------------------------------------------------------------------------
+/**
+ * @brief	DXGI インスタンスを取得する
+ * @return	DXGI インスタンスの参照
+ */
+[[nodiscard]] const DXGI& Device::dxgi() const noexcept {
+    return dxgiInstance_;
+}
+
 

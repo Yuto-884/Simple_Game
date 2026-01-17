@@ -142,6 +142,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
+    <ClCompile Include="camera.cpp" />
     <ClCompile Include="command_allocator.cpp" />
     <ClCompile Include="command_list.cpp" />
     <ClCompile Include="command_queue.cpp" />
@@ -151,19 +153,32 @@
     <ClCompile Include="device.cpp" />
     <ClCompile Include="Dx12.cpp" />
     <ClCompile Include="DXGI.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="entry.cpp" />
     <ClCompile Include="fence.cpp" />
+    <ClCompile Include="game_object.cpp" />
+    <ClCompile Include="game_object_manager.cpp" />
+    <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="object.cpp" />
     <ClCompile Include="pipline_state_object.cpp" />
+    <ClCompile Include="player.cpp" />
+    <ClCompile Include="quad_polygon.cpp" />
     <ClCompile Include="render_target.cpp" />
     <ClCompile Include="root_signature.cpp" />
     <ClCompile Include="shader.cpp" />
+    <ClCompile Include="shape.cpp" />
+    <ClCompile Include="shape_container.cpp" />
     <ClCompile Include="swap_chain.cpp" />
+    <ClCompile Include="triangle_polygon.cpp" />
     <ClCompile Include="vertex_buffer.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bullet.h" />
+    <ClInclude Include="camera.h" />
     <ClInclude Include="command_allocator.h" />
     <ClInclude Include="command_list.h" />
     <ClInclude Include="command_queue.h" />
@@ -173,12 +188,22 @@
     <ClInclude Include="device.h" />
     <ClInclude Include="Dx12.h" />
     <ClInclude Include="DXGI.h" />
+    <ClInclude Include="enemy.h" />
     <ClInclude Include="fence.h" />
+    <ClInclude Include="game_object.h" />
+    <ClInclude Include="game_object_manager.h" />
+    <ClInclude Include="input.h" />
+    <ClInclude Include="object.h" />
     <ClInclude Include="pipline_state_object.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="quad_polygon.h" />
     <ClInclude Include="render_target.h" />
     <ClInclude Include="root_signature.h" />
     <ClInclude Include="shader.h" />
+    <ClInclude Include="shape.h" />
+    <ClInclude Include="shape_container.h" />
     <ClInclude Include="swap_chain.h" />
+    <ClInclude Include="triangle_polygon.h" />
     <ClInclude Include="vertex_buffer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

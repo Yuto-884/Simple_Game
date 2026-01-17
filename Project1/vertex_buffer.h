@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 
 #include "device.h"
 #include <d3d12.h>
@@ -31,4 +31,4 @@ private:
     D3D12_VERTEX_BUFFER_VIEW vbView_{};
     uint32_t vertexCount_{};
     uint32_t strideBytes_{};
-};
+};*/

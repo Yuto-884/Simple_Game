@@ -20,15 +20,14 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~CommandQueue();
+    ~CommandQueue() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	コマンドキューの生成
-     * @param	device	デバイスクラスのインスタンス
      * @return	生成の成否
      */
-    [[nodiscard]] bool create(const Device& device) noexcept;
+    [[nodiscard]] bool create() noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -38,5 +37,5 @@ public:
     [[nodiscard]] ID3D12CommandQueue* get() const noexcept;
 
 private:
-    ID3D12CommandQueue* commandQueue_{};  /// コマンドキュー
+    Microsoft::WRL::ComPtr<ID3D12CommandQueue> commandQueue_{};  /// コマンドキュー
 };

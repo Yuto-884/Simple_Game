@@ -20,13 +20,14 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~Fence();
+    ~Fence() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	フェンスを作成する
+     * @return	作成出来た場合は true
      */
-    [[nodiscard]] bool create(const Device& device) noexcept;
+    [[nodiscard]] bool create() noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -41,8 +42,7 @@ public:
      */
     [[nodiscard]] ID3D12Fence* get() const noexcept;
 
-
 private:
-    ID3D12Fence* fence_{};         /// フェンス
-    HANDLE       waitGpuEvent_{};  /// GPU と CPU 同期用のイベントハンドル
+    Microsoft::WRL::ComPtr<ID3D12Fence> fence_{};         /// フェンス
+    HANDLE                              waitGpuEvent_{};  /// GPU と CPU 同期用のイベントハンドル
 };

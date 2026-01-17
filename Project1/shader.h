@@ -20,15 +20,14 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~Shader();
+    ~Shader() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	シェーダを作成する
-     * @param	device	デバイスクラスのインスタンス
      * @return	成功すれば true
      */
-    [[nodiscard]] bool create(const Device& device) noexcept;
+    [[nodiscard]] bool create() noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -44,8 +43,7 @@ public:
      */
     [[nodiscard]] ID3DBlob* pixelShader() const noexcept;
 
-
 private:
-    ID3DBlob* vertexShader_{};  /// 頂点シェーダ
-    ID3DBlob* pixelShader_{};   /// ピクセルシェーダ
+    Microsoft::WRL::ComPtr<ID3DBlob> vertexShader_{};  /// 頂点シェーダ
+    Microsoft::WRL::ComPtr<ID3DBlob> pixelShader_{};   /// ピクセルシェーダ
 };

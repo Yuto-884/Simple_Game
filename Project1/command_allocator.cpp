@@ -5,29 +5,17 @@
 
 //---------------------------------------------------------------------------------
 /**
- * @brief    デストラクタ
- */
-CommandAllocator::~CommandAllocator() {
-    // コマンドアロケータの解放
-    if (commandAllocator_) {
-        commandAllocator_->Release();
-        commandAllocator_ = nullptr;
-    }
-}
-
-//---------------------------------------------------------------------------------
-/**
  * @brief	コマンドキューの生成
- * @param	device	デバイスクラスのインスタンス
+ * @param	type	コマンドリストのタイプ
  * @return	成功すれば true
  */
-[[nodiscard]] bool CommandAllocator::create(const Device& device, const D3D12_COMMAND_LIST_TYPE type) noexcept {
+[[nodiscard]] bool CommandAllocator::create(const D3D12_COMMAND_LIST_TYPE type) noexcept {
 
     // コマンドリストのタイプを設定
     type_ = type;
 
     // コマンドアロケータの生成
-    const auto hr = device.get()->CreateCommandAllocator(type_, IID_PPV_ARGS(&commandAllocator_));
+    const auto hr = Device::instance().get()->CreateCommandAllocator(type_, IID_PPV_ARGS(&commandAllocator_));
     if (FAILED(hr)) {
         assert(false && "コマンドアロケータの作成に失敗しました");
         return false;
@@ -58,9 +46,8 @@ void CommandAllocator::reset() noexcept {
 [[nodiscard]] ID3D12CommandAllocator* CommandAllocator::get() const noexcept {
     if (!commandAllocator_) {
         assert(false && "コマンドアロケータが未作成です");
-        return nullptr;
     }
-    return commandAllocator_;
+    return commandAllocator_.Get();
 }
 //---------------------------------------------------------------------------------
 /**

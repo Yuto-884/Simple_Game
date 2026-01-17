@@ -22,17 +22,16 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~PiplineStateObject();
+    ~PiplineStateObject() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	パイプラインステートオブジェクトを作成する
-     * @param	device			デバイスクラスのインスタンス
      * @param	shader			シェーダクラスのインスタンス
      * @param	rootSignature	ルートシグネチャクラスのインスタンス
      * @return	成功すれば true
      */
-    [[nodiscard]] bool create(const Device& device, const Shader& shader, const RootSignature& rootSignature) noexcept;
+    [[nodiscard]] bool create(const Shader& shader, const RootSignature& rootSignature) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -42,5 +41,5 @@ public:
     [[nodiscard]] ID3D12PipelineState* get() const noexcept;
 
 private:
-    ID3D12PipelineState* pipelineState_ = {};  ///< パイプラインステート
+    Microsoft::WRL::ComPtr<ID3D12PipelineState> pipelineState_{};  /// パイプラインステート
 };

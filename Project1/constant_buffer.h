@@ -26,14 +26,10 @@ public:
     //---------------------------------------------------------------------------------
     /**
      * @brief	コンスタントバッファの作成
-     * @param	device			デバイスクラスのインスタンス
-     * @param	heap			登録先のディスクリプタヒープのインスタンス
      * @param	bufferSize		コンスタントバッファのサイズ
-     * @param	descriptorIndex	ディスクリプタの登録インデックス
      * @return	生成の成否
      */
-    [[nodiscard]] bool create(const Device& device, const DescriptorHeap& heap, UINT bufferSize, UINT descriptorIndex) noexcept;
-
+    [[nodiscard]] bool create(UINT bufferSize) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -50,6 +46,7 @@ public:
     [[nodiscard]] D3D12_GPU_DESCRIPTOR_HANDLE getGpuDescriptorHandle() const noexcept;
 
 private:
-    ID3D12Resource* constantBuffer_{};  /// コンスタントバッファ
-    D3D12_GPU_DESCRIPTOR_HANDLE gpuHandle_{};       /// GPU 用ディスクリプタハンドル
+    Microsoft::WRL::ComPtr<ID3D12Resource> constantBuffer_{};   /// コンスタントバッファ
+    UINT                                   descriptorIndex_{};  /// ディスクリプタインデックス
+    D3D12_GPU_DESCRIPTOR_HANDLE            gpuHandle_{};        /// GPU 用ディスクリプタハンドル
 };

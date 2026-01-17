@@ -2,9 +2,7 @@
 
 #pragma once
 
-#include "DXGI.h"
 #include "command_queue.h"
-#include "window.h"
 
 //---------------------------------------------------------------------------------
 /**
@@ -22,17 +20,15 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~SwapChain();
+    ~SwapChain() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	スワップチェインの生成
-     * @param	dxgi			dxgi クラスのインスタンス
-     * @param	window			ウィンドウクラスのインスタンス
      * @param	commandQueue	コマンドキュークラスのインスタンス
      * @return	生成の成否
      */
-    [[nodiscard]] bool create(const DXGI& dxgi, const Window& window, const CommandQueue& commandQueue) noexcept;
+    [[nodiscard]] bool create(const CommandQueue& commandQueue) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -48,8 +44,7 @@ public:
      */
     [[nodiscard]] const DXGI_SWAP_CHAIN_DESC1& getDesc() const noexcept;
 
-
 private:
-    IDXGISwapChain3* swapChain_{};      /// スワップチェイン
-    DXGI_SWAP_CHAIN_DESC1 swapChainDesc_{};  /// スワップチェインの設定
+    Microsoft::WRL::ComPtr<IDXGISwapChain3> swapChain_{};      /// スワップチェイン
+    DXGI_SWAP_CHAIN_DESC1                   swapChainDesc_{};  /// スワップチェインの設定
 };

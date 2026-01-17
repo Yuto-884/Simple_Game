@@ -21,16 +21,15 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~CommandList();
+    ~CommandList() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	コマンドリスト作成
-     * @param	device	デバイスクラスのインスタンス
      * @param	command	コマンドアロケータクラスのインスタンス
      * @return	生成の成否
      */
-    [[nodiscard]] bool create(const Device& device, const CommandAllocator& commandAllocator) noexcept;
+    [[nodiscard]] bool create(const CommandAllocator& commandAllocator) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -48,5 +47,5 @@ public:
 
 
 private:
-    ID3D12GraphicsCommandList* commandList_{};       /// コマンドリスト
+    Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> commandList_{};       /// コマンドリスト
 };

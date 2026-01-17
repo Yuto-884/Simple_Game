@@ -1,31 +1,29 @@
 // デプスバッファ制御クラス
 
 #include "depth_buffer.h"
+#include "descriptor_heap.h"
+#include "../window/window.h"
 #include <cassert>
+
+namespace {
+    constexpr auto heapType_ = D3D12_DESCRIPTOR_HEAP_TYPE_DSV;
+}
 
 //---------------------------------------------------------------------------------
 /**
  * @brief    デストラクタ
  */
 DepthBuffer::~DepthBuffer() {
-    // デプスバッファの解放
-    if (depthBuffer_) {
-        depthBuffer_->Release();
-        depthBuffer_ = nullptr;
-    }
 }
 
 //---------------------------------------------------------------------------------
 /**
  * @brief	デプスバッファを生成する
- * @param	device			デバイスクラスのインスタンス
- * @param	heap			登録先のディスクリプタヒープのインスタンス
- * @param	window			ウィンドウクラスのインスタンス
  * @return	生成の成否
  */
-[[nodiscard]] bool DepthBuffer::create(const Device& device, const DescriptorHeap& heap, const Window& window) noexcept {
+[[nodiscard]] bool DepthBuffer::create() noexcept {
     // ウィンドウサイズを取得
-    const auto [w, h] = window.size();
+    const auto [w, h] = Window::instance().size();
 
     // デプスバッファ用のテクスチャリソースの作成
     D3D12_HEAP_PROPERTIES heapProps{};
@@ -48,7 +46,7 @@ DepthBuffer::~DepthBuffer() {
     clearValue.DepthStencil.Depth = 1.0f;
     clearValue.DepthStencil.Stencil = 0;
 
-    const auto res = device.get()->CreateCommittedResource(
+    const auto res = Device::instance().get()->CreateCommittedResource(
         &heapProps,
         D3D12_HEAP_FLAG_NONE,
         &depthDesc,
@@ -62,11 +60,9 @@ DepthBuffer::~DepthBuffer() {
     }
 
     // ビューの作成
-    auto heapType = heap.getType();
-    if (heapType != D3D12_DESCRIPTOR_HEAP_TYPE_DSV) {
-        assert(false && "ディスクリプタヒープのタイプが DSV ではありません");
-        false;
-    }
+
+    // ヒープ取得
+    auto heap = DescriptorHeapContainer::instance().get(heapType_);
 
     // デプスビューの設定
     D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc{};
@@ -75,9 +71,9 @@ DepthBuffer::~DepthBuffer() {
     dsvDesc.Flags = D3D12_DSV_FLAG_NONE;
 
     // ディスクリプタヒープの開始ハンドルを取得
-    handle_ = heap.get()->GetCPUDescriptorHandleForHeapStart();
+    handle_ = heap->GetCPUDescriptorHandleForHeapStart();
     // デプスビューの作成
-    device.get()->CreateDepthStencilView(depthBuffer_, &dsvDesc, handle_);
+    Device::instance().get()->CreateDepthStencilView(depthBuffer_.Get(), &dsvDesc, handle_);
 
     return true;
 }
@@ -89,7 +85,7 @@ DepthBuffer::~DepthBuffer() {
  */
 [[nodiscard]] ID3D12Resource* DepthBuffer::depthBuffer() const noexcept {
     assert(depthBuffer_ && "デプスバッファが未生成です");
-    return depthBuffer_;
+    return depthBuffer_.Get();
 }
 
 //---------------------------------------------------------------------------------

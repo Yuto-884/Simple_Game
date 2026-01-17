@@ -20,15 +20,14 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~RootSignature();
+    ~RootSignature() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	ルートシグネチャを作成する
-     * @param	device	デバイスクラスのインスタンス
      * @return	成功すれば true
      */
-    [[nodiscard]] bool create(const Device& device) noexcept;
+    [[nodiscard]] bool create() noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -38,5 +37,5 @@ public:
     [[nodiscard]] ID3D12RootSignature* get() const noexcept;
 
 private:
-    ID3D12RootSignature* rootSignature_{};  /// ルートシグネチャ
+    Microsoft::WRL::ComPtr<ID3D12RootSignature> rootSignature_{};  /// ルートシグネチャ
 };

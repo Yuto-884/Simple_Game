@@ -20,15 +20,15 @@ public:
     /**
      * @brief    デストラクタ
      */
-    ~CommandAllocator();
+    ~CommandAllocator() = default;
 
     //---------------------------------------------------------------------------------
     /**
      * @brief	コマンドアロケータ作成
-     * @param	device	デバイスクラスのインスタンス
      * @param	type	コマンドリストのタイプ
+     * @return	成功すれば true
      */
-    [[nodiscard]] bool create(const Device& device, const D3D12_COMMAND_LIST_TYPE type) noexcept;
+    [[nodiscard]] bool create(const D3D12_COMMAND_LIST_TYPE type) noexcept;
 
     //---------------------------------------------------------------------------------
     /**
@@ -51,6 +51,6 @@ public:
     [[nodiscard]] D3D12_COMMAND_LIST_TYPE getType() const noexcept;
 
 private:
-    ID3D12CommandAllocator* commandAllocator_{};  /// コマンドアロケータ
-    D3D12_COMMAND_LIST_TYPE type_{};              /// コマンドリストのタイプ
+    Microsoft::WRL::ComPtr<ID3D12CommandAllocator> commandAllocator_{};  /// コマンドアロケータ
+    D3D12_COMMAND_LIST_TYPE                        type_{};              /// コマンドリストのタイプ
 };

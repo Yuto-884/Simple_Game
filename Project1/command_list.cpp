@@ -5,26 +5,15 @@
 
 //---------------------------------------------------------------------------------
 /**
- * @brief    デストラクタ
- */
-CommandList::~CommandList() {
-    // コマンドリストの解放
-    if (commandList_) {
-        commandList_->Release();
-        commandList_ = nullptr;
-    }
-}
-
-//---------------------------------------------------------------------------------
-/**
  * @brief	コマンドリスト作成
- * @param	device	デバイスクラスのインスタンス
  * @param	command	コマンドアロケータクラスのインスタンス
  * @return	生成の成否
  */
-[[nodiscard]] bool CommandList::create(const Device& device, const CommandAllocator& commandAllocator) noexcept {
+[[nodiscard]] bool CommandList::create(const CommandAllocator& commandAllocator) noexcept {
     // コマンドリストの作成
-    const auto hr = device.get()->CreateCommandList(0, commandAllocator.getType(), commandAllocator.get(), nullptr, IID_PPV_ARGS(&commandList_));
+    const auto hr = Device::instance().get()->CreateCommandList(
+        0, commandAllocator.getType(), commandAllocator.get(),
+        nullptr, IID_PPV_ARGS(&commandList_));
     if (FAILED(hr)) {
         assert(false && "コマンドリストの作成に失敗しました");
         return false;
@@ -57,7 +46,6 @@ void CommandList::reset(const CommandAllocator& commandAllocator) noexcept {
 [[nodiscard]] ID3D12GraphicsCommandList* CommandList::get() const noexcept {
     if (!commandList_) {
         assert(false && "コマンドリストが未作成です");
-        return nullptr;
     }
-    return commandList_;
+    return commandList_.Get();
 }
