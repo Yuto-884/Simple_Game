@@ -13,35 +13,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="ソース ファイル\directx">
+      <UniqueIdentifier>{5037813d-cb85-4368-9092-c5236e464107}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\directx">
+      <UniqueIdentifier>{37f1b7d8-db64-4b03-a874-4af5896d27a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Dx12.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="command_allocator.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="command_list.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="command_queue.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="descriptor_heap.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="device.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="fence.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="render_target.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="swap_chain.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="DXGI.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -51,76 +30,103 @@
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="pipline_state_object.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="root_signature.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="shader.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="constant_buffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="depth_buffer.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="vertex_buffer.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Dx12.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="command_allocator.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="command_list.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="command_queue.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="constant_buffer.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="depth_buffer.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="descriptor_heap.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="device.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="fence.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="pipline_state_object.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="render_target.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="root_signature.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="shader.cpp">
+      <Filter>ソース ファイル\directx</Filter>
+    </ClCompile>
+    <ClCompile Include="swap_chain.cpp">
+      <Filter>ソース ファイル\directx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dx12.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="device.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="descriptor_heap.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="render_target.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="swap_chain.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="command_queue.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="command_allocator.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="command_list.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="fence.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="window.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="DXGI.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
-    <ClInclude Include="pipline_state_object.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="command_allocator.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
-    <ClInclude Include="root_signature.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="command_list.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
-    <ClInclude Include="shader.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="command_queue.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
     <ClInclude Include="constant_buffer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
     <ClInclude Include="depth_buffer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="descriptor_heap.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="device.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="fence.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="pipline_state_object.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="render_target.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="root_signature.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="shader.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
+    </ClInclude>
+    <ClInclude Include="swap_chain.h">
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
     <ClInclude Include="vertex_buffer.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\directx</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
