@@ -19,7 +19,8 @@ namespace game {
         GameObject::initialize();
 
         auto quadId = ShapeContainer::instance().create<QuadPolygon>();
-        set({ -.2f, 0.0f, 0.1f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { .0f, 1, .0f, 1 }, quadId);
+        set({ -.2f, 0.0f, 0.1f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, { 0.0f, 1.0f, 1.0f, 1.0f }
+        , quadId);
     }
 
     //---------------------------------------------------------------------------------
@@ -49,10 +50,13 @@ namespace game {
         DirectX::XMVECTOR temp = DirectX::XMVectorSet(pos.x, pos.y, pos.z, 0.0f);
         world_.r[3] = DirectX::XMVectorAdd(world_.r[3], temp);
 
-        if (Input::instance().getTrigger('B')) {
-            // íeÇÃê∂ê¨
+        if (
+            Input::instance().getTrigger('B') ||
+            Input::instance().getTrigger(VK_SPACE)
+            ) {
             GameObjectManager::instance().createObject<Bullet>(handle());
         }
+
     }
 
 }  // namespace game
