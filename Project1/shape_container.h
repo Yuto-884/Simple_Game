@@ -5,6 +5,7 @@
 #include "shape.h"
 #include <unordered_map>
 #include <memory>
+#include<typeinfo>
 
 //---------------------------------------------------------------------------------
 /**
@@ -30,21 +31,22 @@ public:
      */
     template <class T>
     [[nodiscard]] UINT64 create() noexcept {
-        const auto id = id::get<T>();
+        const UINT64 id = typeid(T).hash_code();
+
         if (shapes_.find(id) != shapes_.end()) {
-            // Šù‚É‘¶İ‚µ‚Ä‚¢‚éê‡‚Í‰½‚à‚µ‚È‚¢
             return id;
         }
 
-        // Œ`ó‚Ì¶¬‚Æ“o˜^
         auto p = std::make_unique<T>();
         if (!p->create()) {
             assert(false && "Œ`ó‚Ì¶¬‚É¸”s‚µ‚Ü‚µ‚½");
             return 0;
         }
+
         shapes_.emplace(id, std::move(p));
         return id;
     }
+
 
     //---------------------------------------------------------------------------------
     /**

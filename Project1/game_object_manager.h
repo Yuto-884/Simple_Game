@@ -4,6 +4,8 @@
 
 #include "game_object.h"
 #include <functional>
+#include <typeinfo>
+
 
 namespace game {
 
@@ -79,7 +81,7 @@ namespace game {
 
             auto func = [... a = std::forward<Args>(args)]() mutable {
                 auto p = std::make_unique<T>(std::move(a)...);
-                p->setTypeId(id::get<T>());
+                p->setTypeId(typeid(T).hash_code());
                 return p;
                 };
             registerCreation(std::move(func), handle);
@@ -130,4 +132,5 @@ namespace game {
         UINT64 counter_{};
     };
 }  // namespace game
+
 

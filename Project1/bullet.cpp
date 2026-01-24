@@ -3,6 +3,9 @@
 #include "bullet.h"
 #include "enemy.h"
 
+#include <typeinfo>
+
+
 #include "shape_container.h"
 #include "quad_polygon.h"
 
@@ -55,7 +58,7 @@ namespace game {
      * @brief	ƒqƒbƒg‚·‚é‘ÎÛ
      */
     [[nodiscard]] UINT64 Bullet::hitTargetTypeId() noexcept {
-        return id::get<Enemy>();
+        return typeid(Enemy).hash_code();
     }
 
 }  // namespace game
