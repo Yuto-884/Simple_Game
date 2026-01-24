@@ -151,7 +151,6 @@
     <ClCompile Include="depth_buffer.cpp" />
     <ClCompile Include="descriptor_heap.cpp" />
     <ClCompile Include="device.cpp" />
-    <ClCompile Include="Dx12.cpp" />
     <ClCompile Include="DXGI.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="entry.cpp" />
@@ -159,9 +158,6 @@
     <ClCompile Include="game_object.cpp" />
     <ClCompile Include="game_object_manager.cpp" />
     <ClCompile Include="input.cpp" />
-    <ClCompile Include="main.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="object.cpp" />
     <ClCompile Include="pipline_state_object.cpp" />
     <ClCompile Include="player.cpp" />
@@ -173,7 +169,6 @@
     <ClCompile Include="shape_container.cpp" />
     <ClCompile Include="swap_chain.cpp" />
     <ClCompile Include="triangle_polygon.cpp" />
-    <ClCompile Include="vertex_buffer.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,7 +181,6 @@
     <ClInclude Include="depth_buffer.h" />
     <ClInclude Include="descriptor_heap.h" />
     <ClInclude Include="device.h" />
-    <ClInclude Include="Dx12.h" />
     <ClInclude Include="DXGI.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="fence.h" />
@@ -204,7 +198,6 @@
     <ClInclude Include="shape_container.h" />
     <ClInclude Include="swap_chain.h" />
     <ClInclude Include="triangle_polygon.h" />
-    <ClInclude Include="vertex_buffer.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

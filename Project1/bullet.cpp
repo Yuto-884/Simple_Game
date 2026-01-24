@@ -42,7 +42,7 @@ namespace game {
         // ワールド行列の更新
         world_ = DirectX::XMMatrixMultiply(world_, DirectX::XMMatrixTranslation(pos.x, pos.y, pos.z));
 
-        GameObjectManager::instance().registerHit(handle());
+        //GameObjectManager::instance().registerHit(handle());
     }
 
     //---------------------------------------------------------------------------------
